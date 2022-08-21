@@ -365,8 +365,11 @@ jobs:
             then
               echo '-------------- Delete Confirmed ----------------'
               aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
+              echo '-------------- Step 1 fine ----------------'
               aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
+              echo '-------------- Step 2 fine ----------------'
               aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
+              echo '-------------- Step 3 fine ----------------'
             else
               echo '-------------- Cannot Cleanup ----------------'
             fi
