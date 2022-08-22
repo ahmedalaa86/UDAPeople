@@ -333,6 +333,7 @@ jobs:
                 --no-paginate --output text)
             echo $OldWorkflowID >> ~/OldWorkflowID.txt
             cat ~/OldWorkflowID.txt
+            pwd
             aws cloudformation deploy \
               --template-file .circleci/files/cloudfront.yml \
               --stack-name "InitialStack" \
@@ -343,7 +344,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - ~/OldWorkflowID.txt
+            - ./OldWorkflowID.txt
 
   cleanup:
     docker:
