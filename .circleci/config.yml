@@ -359,8 +359,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apt-get install gzip
-            apt-get install tar
+            yum install -y tar gzip
       - attach_workspace:
           at: ~/
       - run:
