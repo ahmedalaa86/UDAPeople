@@ -326,6 +326,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install dependencies
+          command: |
+            apk add --update gzip
+            apk add --update tar
+      - run:
           name: Update cloudfront distribution
           command: |
             export OldWorkflowID=$(aws cloudformation \
@@ -333,7 +338,6 @@ jobs:
                 --no-paginate --output text)
             echo $OldWorkflowID >> ~/OldWorkflowID.txt
             cat ~/OldWorkflowID.txt
-            pwd
             aws cloudformation deploy \
               --template-file .circleci/files/cloudfront.yml \
               --stack-name "InitialStack" \
@@ -344,7 +348,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - ./OldWorkflowID.txt
+            - /root/project/OldWorkflowID.txt
 
   cleanup:
     docker:
